@@ -1,24 +1,25 @@
-# README
+# ISW-711 - Rails RESTfull API project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## Ruby version
 
-* Ruby version
+## System dependencies
 
-* System dependencies
+## Configuration
 
-* Configuration
+- Configure `database.yml` file
 
-* Database creation
+- Database creation
+`rake db:create` 
 
-* Database initialization
+- Database initialization
+`rake db:migrate` 
 
-* How to run the test suite
+## Start the server
 
-* Services (job queues, cache servers, search engines, etc.)
+`rails s`
 
-* Deployment instructions
+## Testing endpoints with CURL
 
-* ...
+- POST `curl -d "firstName=Pablo&lastName=Alvarez&phone=22333" -X POST http://localhost:3000/clients`
+
