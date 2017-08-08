@@ -1,4 +1,5 @@
 class ClientsController < ApplicationController
+  before_action :validate_user
 
   def index
     # get all clients from the database
@@ -8,7 +9,6 @@ class ClientsController < ApplicationController
 
   def create
     client = Client.new
-
     client.firstName = params[:firstName]
     client.lastName = params[:lastName]
     client.phone = params[:phone]
