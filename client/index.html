@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Client</title>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+  <script>
+  function getZombies() {
+    $.ajax({
+      method: "GET",
+      url: "http://localhost:3000/zombies"
+    }).done(function( response ) {
+        debugger;
+        console.log(response);
+        renderZombiesTable(response);
+    }).fail(function (error){
+      debugger;
+      console.log(error);
+    });
+  }
+
+  function saveZombie() {
+    debugger;
+    var zombie = {};
+    zombie.name = $("#zombie_name").val();
+    zombie.speed = 20;
+    zombie.zombie_type = "tanque";
+
+    $.ajax({
+      method: "POST",
+      url: "http://localhost:3000/zombies",
+      data: {
+        "zombie": zombie
+      }
+    }).done(function( response ) {
+        debugger;
+        console.log(response);
+        getZombies();
+    }).fail(function (error){
+      debugger;
+      console.log(error);
+    });
+  }
+
+  function renderZombiesTable(listOfZombies) {
+    listOfZombies.forEach(function(element) {
+      debugger;
+      var row = "<tr>";
+      row += "<td>"+element.name+"</td>";
+      row += "<tr/>";
+      $("#zombiesTable").append(row);
+    });
+  }
+  </script>
+</head>
+
+<body>
+  <h3>Zombies</h3>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody id="zombiesTable">
+    </tbody>
+  </table>
+
+
+  <button type="button" id="getZombies" onclick="getZombies()" class="btn btn-default">Get Zombies</button>
+
+
+
+  <form action="" method="POST" class="form-horizontal" role="form">
+      <div class="form-group">
+        <legend>Form title</legend>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-2">
+
+          <input type="text" name="" id="zombie_name" class="form-control" value="" required="required" pattern="" title="">
+
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-2">
+          <button type="button" onclick="saveZombie()" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+  </form>
+
+</body>
+</html>
